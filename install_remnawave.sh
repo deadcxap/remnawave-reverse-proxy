@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SCRIPT_VERSION="2.0.2_no_os_check_no_22ssh"
+SCRIPT_VERSION="2.0.2_no_22ssh"
 DIR_REMNAWAVE="/usr/local/remnawave_reverse/"
 LANG_FILE="${DIR_REMNAWAVE}selected_language"
 SCRIPT_URL="https://raw.githubusercontent.com/deadcxap/remnawave-reverse-proxy/refs/heads/main/install_remnawave.sh"
@@ -803,6 +803,12 @@ reading() {
 error() {
     echo -e "${COLOR_RED}$*${COLOR_RESET}"
     exit 1
+}
+
+check_os() {
+    if ! grep -q "bullseye" /etc/os-release && ! grep -q "bookworm" /etc/os-release && ! grep -q "jammy" /etc/os-release && ! grep -q "noble" /etc/os-release; then
+        error "${LANG[ERROR_OS]}"
+    fi
 }
 
 check_root() {
@@ -5201,6 +5207,7 @@ if ! load_language; then
 fi
 
 check_root
+check_os
 install_script_if_missing
 show_menu
 
