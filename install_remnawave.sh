@@ -5201,7 +5201,6 @@ if ! load_language; then
 fi
 
 check_root
-check_os
 install_script_if_missing
 show_menu
 
