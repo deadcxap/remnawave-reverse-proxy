@@ -805,12 +805,6 @@ error() {
     exit 1
 }
 
-check_os() {
-    if ! grep -q "bullseye" /etc/os-release && ! grep -q "bookworm" /etc/os-release && ! grep -q "jammy" /etc/os-release && ! grep -q "noble" /etc/os-release; then
-        error "${LANG[ERROR_OS]}"
-    fi
-}
-
 check_root() {
     if [[ $EUID -ne 0 ]]; then
         error "${LANG[ERROR_ROOT]}"
